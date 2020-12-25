@@ -1,5 +1,8 @@
 # Ignore everything
 *
 # Except
+!.gitignore
 !blacklist.conf
 !source.py
+!*report/*
+
