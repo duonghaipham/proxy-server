@@ -38,7 +38,7 @@ def IsBlocked(host):
             return True         # tim thay host co trong blacklist
     return False
 
-def Get(request, server):
+def GetRequest(request, server):
     """Proxy nhan request tu client, chuyen tiep len server (neu khong bi chan)"""
     client = socket(AF_INET, SOCK_STREAM)
     try:
@@ -49,7 +49,7 @@ def Get(request, server):
         else:
             client.connect((host, port))
             client.sendall(request)     # gui request tu proxy cho server
-            Post(client, server)        # goi ham de nhan ket qua response
+            GetResponse(client, server)        # goi ham de nhan ket qua response
             print("Received from " + host)
     except error:
         client.close()
@@ -57,7 +57,7 @@ def Get(request, server):
     except:
         pass
 
-def Post(client, server):
+def GetResponse(client, server):
     """Proxy nhan response tu server, chuyen tiep cho trinh duyet"""
     while True:
         response = client.recv(SIZE)    # nhan het tat ca cac chunk cua trang web
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         while True:
             server, address = s.accept()
             request = server.recv(SIZE)
-            Thread(target = Get, args = (request, server)).start()  # tao luong thuc thi cho request moi
+            Thread(target = GetRequest, args = (request, server)).start()  # tao luong thuc thi cho request moi
 
     except KeyboardInterrupt:
         print("interrupted")
