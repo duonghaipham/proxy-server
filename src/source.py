@@ -1,7 +1,7 @@
 from socket import socket, error, AF_INET, SOCK_STREAM
 from threading import Thread
 
-HOST = "127.0.0.1"  # dia chi localhost
+HOST = "127.0.0.1"  # dia chi loopback
 PORT = 8888         # port proxy lang nghe
 SIZE = 1048576      # kich thuoc chunk cua moi lan nhan du lieu tu server
 TIMES = 10          # so ket noi toi da
